@@ -71,6 +71,12 @@ def find_dates(text):
 
         for i, w in enumerate(words):
             w_to_check = w
+
+            # Strip extra characters to ensure indicators are located correctly in text
+            w_to_check = w_to_check.replace(".", "")
+            w_to_check = w_to_check.replace(",", "")
+            w_to_check = w_to_check.replace(" ", "")
+
             num_words = token.count(" ") + 1
             if num_words == 2:
                 if i != len(words) - 1:
@@ -78,7 +84,7 @@ def find_dates(text):
             if num_words == 3:
                 if i != len(words) - 2:
                     w_to_check = words[i] + " " + words[i + 1] + " " + words[i + 2]
-            if token in w_to_check:
+            if token == w_to_check:
                 if token_running_counts[token] == token_counts[token]: break
                 token_running_counts[token] += 1
                 tokens.append(DateIndicator(token, i, token_type))
@@ -241,12 +247,13 @@ def format_token_groups(groups):
         if has_token_type(group, IndicatorType.DATE):
             formatted_groups.append(get_token_type(group, IndicatorType.DATE))
             continue
+
         if has_token_type(group, IndicatorType.YEAR):
             new_year = get_token_type(group, IndicatorType.YEAR)
             # If the next date is in a new year then reset all lower level info e.g. month and day and update year
             if new_year != year: 
-                month = ""
-                day = ""
+                month = "00"
+                day = "00"
                 weekday = ""
                 time = ""
                 year = new_year
@@ -255,7 +262,7 @@ def format_token_groups(groups):
             new_month = get_token_type(group, IndicatorType.MONTH)
             # If the next date is in a new month then reset all lower level info e.g. day, and update month
             if new_month != month:
-                day = ""
+                day = "00"
                 weekday = ""
                 time = ""
                 month = new_month
