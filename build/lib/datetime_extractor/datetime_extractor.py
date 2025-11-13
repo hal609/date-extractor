@@ -72,7 +72,7 @@ def find_dates(text):
         for i, w in enumerate(words):
             w_to_check = w
 
-            # Strip extra characters to ensure indicators are located correctly in text
+            # Strip extra characters to ensure indicators are located correctly in text recognition 
             w_to_check = w_to_check.replace(".", "")
             w_to_check = w_to_check.replace(",", "")
             w_to_check = w_to_check.replace(" ", "")
@@ -242,7 +242,7 @@ def format_token_groups(groups):
     group_start_locations = []
 
     for group in groups:
-        group_start_locations.append(group[0].pos)
+        group_start_locations.append(min([token.pos for token in group]))
 
         if has_token_type(group, IndicatorType.DATE):
             formatted_groups.append(get_token_type(group, IndicatorType.DATE))
