@@ -211,6 +211,7 @@ def format_token_groups(groups):
             if new_year != year: 
                 month = ""
                 day = ""
+                weekday = ""
                 time = ""
                 year = new_year
 
@@ -219,15 +220,17 @@ def format_token_groups(groups):
             # If the next date is in a new month then reset all lower level info e.g. day, and update month
             if new_month != month:
                 day = ""
+                weekday = ""
                 time = ""
                 month = new_month
 
         if has_token_type(group, IndicatorType.DAY):
             new_day = get_token_type(group, IndicatorType.DAY)
             
-            # If day has changed then clear out previous time
+            # If day has changed then clear out previous time and weekday
             if new_day != day:
                 time = ""
+                weekday = ""
 
             offset_match = re.match(
                 r'(\d+|one|two|three|four|five|six|seven|eight|nine|ten)\s+day[s]?\s+(later|after)', 
@@ -258,7 +261,8 @@ def format_token_groups(groups):
         if day.lower() in date_dict.keys():
             day = date_dict[day.lower()]
         
-        weekday = get_token_type(group, IndicatorType.WEEKDAY)
+        if has_token_type(group, IndicatorType.WEEKDAY):
+            weekday = get_token_type(group, IndicatorType.WEEKDAY)
 
         if month.lower() in month_dict.keys():
             month = month_dict[month.lower()]
