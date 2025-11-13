@@ -48,6 +48,13 @@ def find_date_time_indicators(text):
 
     return found_list
 
+from copy import deepcopy
+def strip_dates(text):
+    stripped_text = deepcopy(text)
+    for pattern in date_time_patterns_dict.keys():
+        stripped_text = pattern.sub('', stripped_text)
+    return stripped_text
+
 
 def find_dates(text):
     # Check for multiples of the same token
@@ -77,13 +84,11 @@ def find_dates(text):
             w_to_check = w_to_check.replace(",", "")
             w_to_check = w_to_check.replace(" ", "")
 
+            # If the token has multiple words then check sequences of that number of words
             num_words = token.count(" ") + 1
-            if num_words == 2:
-                if i != len(words) - 1:
-                    w_to_check = words[i] + " " + words[i + 1]
-            if num_words == 3:
-                if i != len(words) - 2:
-                    w_to_check = words[i] + " " + words[i + 1] + " " + words[i + 2]
+            # Although it looks like this will overflow the words list, python just handles trying to slice beyond the end
+            w_to_check = " ".join(words[i:i+num_words])
+
             if token == w_to_check:
                 if token_running_counts[token] == token_counts[token]: break
                 token_running_counts[token] += 1
@@ -109,7 +114,7 @@ def group_tokens(text, tokens):
         "EXPRNAME": r"^in(\s+the)?(\s+(early|late|mid))?\s+(hours|morning|afternoon|evening|night)\s+of$",
         
         # Phrases e.g. "at roughly the late afternoon", or "in the evening"
-        "PREP_TIME_OF": r"^(in|on|at|by|around|about)(\s+(roughly|approximately|about|around))?(\s+the)?(\s+(early|late|mid))?\s+(hours|morning|afternoon|evening|night)(\s+of)?(\s+the)?$",
+        "PREP_TIME_OF": r"^(in|on|at|by|around|about)(\s+(roughly|approximately|about|around))?(\s+the)?(\s+(early|late|mid))?\s+(hours|morning|afternoon|evening|night)(\s+of|of the|from)?$",
 
         # Concept: Pinpointing a time relative to a larger block.
         # Example Phrases: "at the start of the day", "by the end of the week".
