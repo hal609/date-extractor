@@ -66,3 +66,79 @@ month_dict = {
     "december": "12",
     "dec": "12",
 }
+
+date_dict = {
+    "first": "01",
+    "second": "02",
+    "third": "03",
+    "fourth": "04",
+    "fifth": "05",
+    "sixth": "06",
+    "seventh": "07",
+    "eighth": "08",
+    "ninth": "09",
+    "tenth": "10",
+    "eleventh": "11",
+    "twelfth": "12",
+    "thirteenth": "13",
+    "1st": "01",
+    "2nd": "02",
+    "3rd": "03",
+    "4th": "04",
+    "5th": "05",
+    "6th": "06",
+    "7th": "07",
+    "8th": "08",
+    "9th": "09",
+    "10th": "10",
+    "11th": "11",
+    "12th": "12",
+    "13th": "13",
+    "14th": "14",
+    "15th": "15",
+    "16th": "16",
+    "17th": "17",
+    "18th": "18",
+    "19th": "19",
+    "20th": "20",
+    "21st": "21",
+    "22nd": "22",
+    "23rd": "23",
+    "24th": "24",
+    "25th": "25",
+    "26th": "26",
+    "27th": "27",
+    "28th": "28",
+    "29th": "29",
+    "30th": "30",
+    "31st": "31"
+}
+
+number_map = {
+    "one": 1,
+    "two": 2, 
+    "three": 3, 
+    "four": 4, 
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+    "ten": 10
+}
+
+days_of_the_week = [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
+]
+
+def is_day_of_the_week(text: str):
+    if text.lower() in days_of_the_week:
+        return True
+    else:
+        return False
