@@ -72,7 +72,7 @@ def find_dates(text):
         for i, w in enumerate(words):
             w_to_check = w
 
-            # Strip extra characters to ensure indicators are located correctly in text
+            # Strip extra characters to ensure indicators are located correctly in text recognition 
             w_to_check = w_to_check.replace(".", "")
             w_to_check = w_to_check.replace(",", "")
             w_to_check = w_to_check.replace(" ", "")
