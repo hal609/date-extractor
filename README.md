@@ -1,8 +1,3 @@
----
-title: Parse dates and times from text
-description: A Python module to fuzzy extract dates from a corpus of text.
----
-
 # date-extractor
 
 [![Release](https://img.shields.io/github/v/release/hal609/date-extractor)](https://img.shields.io/github/v/release/hal609/date-extractor)
