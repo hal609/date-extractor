@@ -1,7 +1,7 @@
 [project]
 name = "date-extractor"
 version = "0.0.1"
-description = "This is a template repository for Python projects that use uv for their dependency management."
+description = "A Python module to fuzzy extract dates from text corpuses."
 authors = [{ name = "Hal Kolb", email = "hal@kolb.co.uk" }]
 readme = "README.md"
 keywords = ['python']
