@@ -1,4 +1,4 @@
-from date_extractor import find_dates
+from date_fuzz import find_dates
 
 
 def test_find():
